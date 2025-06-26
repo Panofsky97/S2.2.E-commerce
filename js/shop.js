@@ -75,23 +75,52 @@ const cart = [];
 const total = 0;
 
 // Exercise 1
-const buy = (id) => {
+function buyItem(){
+  const buy = (id) => {
+    const product = products.find(p => p.id === id)
+    if(!product){
+        console.log("No se ha encontrado");
+    }
+
+    const itemInCart = items.find(items => items.id === id);
+
+    if(itemInCart){
+        quantity++
+        console.log("Hay")
+        
+    }else{
+        cart.push({...product, quantity: 1});
+        console.log("Producto añadido")
+    }
+
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
+  }
 }
 
 // Exercise 2
 const cleanCart = () =>  {
+    cart = []
 
 }
 
 // Exercise 3
-const calculateTotal = () =>  {
-    // Calculate total price of the cart using the "cartList" array
+
+let suma = 0;
+
+for (let i = 0; i < cartList.length; i++) {
+    total = cartList[i] + i;    
 }
 
+
+    // Calculate total price of the cart using the "cartList" array
+
+
 // Exercise 4
-const applyPromotionsCart = () =>  {
+const applyPromotionsCart = (cart) =>  {
+
+    
+
     // Apply promotions to each item in the array "cart"
 }
 
