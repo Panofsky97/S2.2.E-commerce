@@ -75,58 +75,60 @@ const cart = [];
 const total = 0;
 
 // Exercise 1
-function buyItem(){
-  const buy = (id) => {
-    const product = products.find(p => p.id === id)
-    if(!product){
-        console.log("No se ha encontrado");
-    }
+function buy(id){
+    // 1. Loop for to the array products to get the item to add to cart
+    const product = products.find(product => product.id === id);
 
-    const itemInCart = items.find(items => items.id === id);
+    // 2. Add found product to the cart array
+
+    const itemInCart = cart.find((item) => item.id === id);
 
     if(itemInCart){
-        quantity++
-        console.log("Hay")
+        itemInCart.quantity++
+        console.log("Articulo sumado")
         
     }else{
+        const newCartIntem(...product)
         cart.push({...product, quantity: 1});
         console.log("Producto añadido")
     }
-
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
-  }
+  
 }
 
 // Exercise 2
 const cleanCart = () =>  {
     cart = []
-
 }
 
 // Exercise 3
 
-let suma = 0;
-
-for (let i = 0; i < cartList.length; i++) {
-    total = cartList[i] + i;    
-}
-
-
     // Calculate total price of the cart using the "cartList" array
 
-
+    applyPromotionsCart(cart);
+    for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price * cart[i].quantity;
+    console.log(`Product: ${cart[i].name}, Quantity: ${cart[i].quantity}, Price: ${cart[i].price}, Total: ${cart[i].price * cart[i].quantity}`);
+    }
+    
 // Exercise 4
 const applyPromotionsCart = (cart) =>  {
-
-    
-
     // Apply promotions to each item in the array "cart"
+
+    if(product[i] == type:'grocery' && products.quantity >= 10){
+        product[i].price = product[i].price - (product[i].price * 0.3);
+        console.log("Promoción aplicada: 30% de descuento en productos de supermercado con cantidad >= 10");
+    }if(product[1] >= 3){
+        product[i].price =product[i].price - (product[i].price * 0.2);
+        console.log("Promoción aplicada: 20% de descuento en productos de supermercado con cantidad >= 3");
+    }else{
+        console.log("No hay promociones disponibles")
+    }
 }
 
 // Exercise 5
 const printCart = () => {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    
 }
 
 
