@@ -7,7 +7,7 @@ const products = [
         type: 'grocery',
         offer: {
             number: 3,
-            percent: 20
+            percent: 20 
         }
     },
     {
@@ -88,57 +88,129 @@ function buy(id){
         console.log("Articulo sumado")
         
     }else{
-        const newCartIntem(...product)
         cart.push({...product, quantity: 1});
         console.log("Producto añadido")
     }
+
+    applyPromotionsCart(cart);
+    printCart();
   
 }
 
 // Exercise 2
-const cleanCart = () =>  {
-    cart = []
+const cleanCart = () => {
+    cart.length = 0; // ✅ Vacía el array sin romper la referencia
+    console.log("Carrito limpiado");
+
+    localStorage.removeItem("cart");
+
+    document.getElementById("cart_list").innerHTML = "";
+    document.getElementById("total_price").textContent = "0";
+    document.getElementById("count_product").textContent = "0";
+    document.getElementById("count_product").textContent = "0";
 }
+
 
 // Exercise 3
 
     // Calculate total price of the cart using the "cartList" array
 
-    applyPromotionsCart(cart);
-    for (let i = 0; i < cart.length; i++) {
-    total += cart[i].price * cart[i].quantity;
-    console.log(`Product: ${cart[i].name}, Quantity: ${cart[i].quantity}, Price: ${cart[i].price}, Total: ${cart[i].price * cart[i].quantity}`);
+    function calculateTotalPrice(cart) {
+        let total = 0;
+
+         applyPromotionsCart(cart);
+
+         for (let i = 0; i < cart.length; i++) {
+           const item = cart[i];
+           total += item.price * item.quantity;
+        }
+        console.log(`Total: ${total}`);
     }
-    
+
 // Exercise 4
 const applyPromotionsCart = (cart) =>  {
     // Apply promotions to each item in the array "cart"
 
-    if(product[i] == type:'grocery' && products.quantity >= 10){
-        product[i].price = product[i].price - (product[i].price * 0.3);
-        console.log("Promoción aplicada: 30% de descuento en productos de supermercado con cantidad >= 10");
-    }if(product[1] >= 3){
-        product[i].price =product[i].price - (product[i].price * 0.2);
-        console.log("Promoción aplicada: 20% de descuento en productos de supermercado con cantidad >= 3");
-    }else{
-        console.log("No hay promociones disponibles")
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart [i];
+        if (item.id === 1 && item.quantity >= 3) {
+            item.discountedPrice = item.price * (1 - item.offer.percent / 100);
+            item.subtotalWithDiscount = item.discountedPrice * item.quantity;
+            console.log(`Promoción añadida ${item.name}: ${item.subtotalWithDiscount} off`);
+        }else if (item.type === 'grocery' && item.quantity >= 10) {
+            item.discountedPrice = item.price * (1 - item.offer.percent / 100);
+            item.subtotalWithDiscount = item.discountedPrice * item.quantity
+            console.log(`Promoción añadida ${item.name}: ${item.subtotalWithDiscount} off`);
+        }else{
+            console.log(`No promotion applied for ${item.name}`);
+        }
+    
     }
 }
 
 // Exercise 5
 const printCart = () => {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    
-}
+    const cartTable = document.getElementById("cart_list");
+    cartTable.innerHTML = ""; // Clear previous content
 
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+
+        const tr = document.createElement("tr");
+
+       tr.innerHTML = `
+            <td>${item.name}</td> 
+            <td>${item.price.toFixed(2)}</td>
+            <td>
+                ${item.quantity}
+                <button onclick="removeFromCart(${item.id})" class="btn btn-sm btn-danger ms-2">-</button>
+            </td>
+            <td>${(item.price * item.quantity).toFixed(2)}</td>
+        `;
+
+        cartTable.appendChild(tr);
+        
+    }
+
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const countProductElement = document.getElementById("count_product");
+    if (countProductElement) {
+
+        countProductElement.textContent = totalItems;
+
+        } else {
+           console.warn("Elemento count_product no encontrado");
+        }
+}
 
 // ** Nivell II **
 
 // Exercise 7
 const removeFromCart = (id) => {
 
+    const itemInCart = cart.find(item => item.id === id);
+
+    if (itemInCart) {
+        if (itemInCart.quantity > 1) {
+            itemInCart.quantity--;
+        } else {
+            const index = cart.findIndex(item => item.id === id);
+            if (index !== -1) {
+                cart.splice(index, 1);
+            }
+        }
+    }
+
+    applyPromotionsCart(cart);
+    printCart();
 }
 
 const open_modal = () =>  {
     printCart();
 }
+
+window.buy = buy;
+window.cleanCart = cleanCart;
+window.open_modal = open_modal;
+window.removeFromCart = removeFromCart;

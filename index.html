@@ -18,6 +18,16 @@
 		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="css/styles.css">
+
+	<p id="formId"></p>
+
+	<p id="fName"></p>
+	<p id="fEmail"></p>
+	<p id="fAddress"></p>
+	<p id="fLastName"></p>	
+	<p id="fPassword"></p>
+	<p id="fPhone"></p>	
+
 </head>
 
 <body>
@@ -38,7 +48,7 @@
 					</button>
 
 					<div class="navbar-nav me-3 me-lg-0 d-flex flex-row align-items-center">
-						<button class="btn btn-outline-dark cart-button" type="button" data-bs-toggle="modal"
+						<button class="btn btn-outline-dark cart-button" type="button" data-bs-toggle="modal" 
 							data-bs-target="#cartModal" data-bs-auto-close="outside" aria-label="Open shopping cart">
 							<i class="fas fa-shopping-cart me-1" aria-hidden="true"></i>
 							<span>Cart</span>
@@ -105,7 +115,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="1"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))"  class="btn btn-outline-dark add-to-cart" data-product-id="1"
 										aria-label="Add Cooking Oil to cart">
 										Add to cart
 									</button>
@@ -125,7 +135,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="2"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))" class="btn btn-outline-dark add-to-cart" data-product-id="2"
 										aria-label="Add Pasta to cart">
 										Add to cart
 									</button>
@@ -145,7 +155,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="3"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))" class="btn btn-outline-dark add-to-cart" data-product-id="3"
 										aria-label="Add Instant cupcake mixture to cart">
 										Add to cart
 									</button>
@@ -176,7 +186,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="4"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))" class="btn btn-outline-dark add-to-cart" data-product-id="4"
 										aria-label="Add All-in-1 to cart">
 										Add to cart
 									</button>
@@ -196,7 +206,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="5"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))"  class="btn btn-outline-dark add-to-cart" data-product-id="5"
 										aria-label="Add Zero makeup kit to cart">
 										Add to cart
 									</button>
@@ -216,7 +226,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="6"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))"  class="btn btn-outline-dark add-to-cart" data-product-id="6"
 										aria-label="Add Lip tints to cart">
 										Add to cart
 									</button>
@@ -247,7 +257,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="7"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))"  class="btn btn-outline-dark add-to-cart" data-product-id="7"
 										aria-label="Add Lawn dress to cart">
 										Add to cart
 									</button>
@@ -267,7 +277,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="8"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))"  class="btn btn-outline-dark add-to-cart" data-product-id="8"
 										aria-label="Add Lawn-chiffon combo to cart">
 										Add to cart
 									</button>
@@ -287,7 +297,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<button type="button" class="btn btn-outline-dark add-to-cart" data-product-id="9"
+									<button type="button" onclick="buy(parseInt(this.dataset.productId))"  class="btn btn-outline-dark add-to-cart" data-product-id="9"
 										aria-label="Add Toddler Frock to cart">
 										Add to cart
 									</button>
@@ -356,7 +366,7 @@
 					</div>
 					<div class="text-center">
 						<a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
-						<button type="button" class="btn btn-secondary m-3" id="clean-cart">Clean Cart</button>
+						<button type="button" class="btn btn-secondary m-3" id="clean-cart" onclick="cleanCart()">Clean Cart</button>
 					</div>
 				</div>
 			</div>
